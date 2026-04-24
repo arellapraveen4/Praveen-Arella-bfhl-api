@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BFHL Tree Builder</title>
+</head>
+<body>
+
+<h2>Enter Relationships</h2>
+
+<textarea id="inputData" rows="5" cols="40" placeholder="Example: A->B, A->C, B->D"></textarea>
+<br><br>
+
+<button onclick="sendData()">Submit</button>
+
+<h3>Response:</h3>
+<pre id="output"></pre>
+
+<script>
+async function sendData() {
+    let input = document.getElementById("inputData").value;
+
+    let dataArray = input.split(",").map(item => item.trim()).filter(item => item);
+
+    try {
+        let res = await fetch("http://localhost:7783/bfhl", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                data: dataArray
+            })
+        });
+
+        let result = await res.json();
+
+        document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+
+    } catch (err) {
+        document.getElementById("output").textContent = "Error: " + err;
+    }
+}
+</script>
+
+</body>
+</html>
