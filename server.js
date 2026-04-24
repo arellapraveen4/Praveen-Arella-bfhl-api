@@ -196,6 +196,8 @@ app.post("/bfhl", (req, res) => {
 
 });
 
-app.listen(7783, () => {
-    console.log("Server running on port 7783");
+const PORT = process.env.PORT || 7783;
+
+app.listen(PORT, () => {
+    console.log("Server running on port", PORT);
 });
