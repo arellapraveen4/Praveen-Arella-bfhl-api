@@ -22,7 +22,7 @@ async function sendData() {
     let dataArray = input.split(",").map(item => item.trim()).filter(item => item);
 
     try {
-        let res = await fetch("http://localhost:7783/bfhl", {
+        let res = await fetch("https://praveen-arella-bfhl-api.onrender.com/bfhl", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
